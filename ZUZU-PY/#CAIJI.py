@@ -7,6 +7,7 @@ import datetime
 from datetime import datetime
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
+from security import safe_requests
 
 # 获取rtp目录下的文件名
 files = os.listdir('rtp')
@@ -75,7 +76,7 @@ for keyword in keywords:
             search_txt = base64.b64encode(bytes_string).decode('utf-8')
             search_url += search_txt
             print(f"{current_time} 查询运营商 : {province}{isp} ，查询网址 : {search_url}")
-            response = requests.get(search_url, timeout=5)
+            response = safe_requests.get(search_url, timeout=5)
             # 处理响应
             response.raise_for_status()
             # 检查请求是否成功
